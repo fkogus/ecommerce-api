@@ -15,41 +15,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ecommerce.api.model.Client;
-import com.ecommerce.api.service.ClientService;
+import com.ecommerce.api.model.Product;
+import com.ecommerce.api.service.ProductService;
 
 @RestController
-@RequestMapping("/api/clients")
-public class ClientController {
-
+@RequestMapping("/api/products")
+public class ProductController {
+    
     @Autowired
-    private ClientService clientService;
-
-    @GetMapping
-    public ResponseEntity<List<Client>> findAll(){
-        return ResponseEntity.status(HttpStatus.OK).body(clientService.findAll());
-    }
+    private ProductService productService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Client>> findById(@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(clientService.findById(id));
+    public ResponseEntity<Optional<Product>> findById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(productService.findById(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Product>> findAll(){
+        return ResponseEntity.status(HttpStatus.OK).body(productService.findAll());
     }
 
     @PostMapping
-    public ResponseEntity<Client> create(@RequestBody Client client){
-        return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(client));
+    public ResponseEntity<Product> create(@RequestBody Product product){
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(product));
     }
 
     @PutMapping
-    public ResponseEntity<Client> update(@RequestBody Client client){
-        return ResponseEntity.status(HttpStatus.OK).body(clientService.update(client));
+    public ResponseEntity<Product> update(@RequestBody Product product){
+        return ResponseEntity.status(HttpStatus.OK).body(productService.update(product));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
-        clientService.deleteById(id);
+        productService.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
-
 }

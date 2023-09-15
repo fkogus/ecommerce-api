@@ -15,41 +15,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ecommerce.api.model.Client;
-import com.ecommerce.api.service.ClientService;
+import com.ecommerce.api.model.Address;
+import com.ecommerce.api.service.AddressService;
 
 @RestController
-@RequestMapping("/api/clients")
-public class ClientController {
-
+@RequestMapping("/api/addresses")
+public class AddressController {
+    
     @Autowired
-    private ClientService clientService;
+    private AddressService addressService;
 
     @GetMapping
-    public ResponseEntity<List<Client>> findAll(){
-        return ResponseEntity.status(HttpStatus.OK).body(clientService.findAll());
+    public ResponseEntity<List<Address>> findAll(){
+        return ResponseEntity.status(HttpStatus.OK).body(addressService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Client>> findById(@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(clientService.findById(id));
+    public ResponseEntity<Optional<Address>> findById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(addressService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Client> create(@RequestBody Client client){
-        return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(client));
+    public ResponseEntity<Address> create(@RequestBody Address address){
+        return ResponseEntity.status(HttpStatus.CREATED).body(addressService.save(address));
     }
 
     @PutMapping
-    public ResponseEntity<Client> update(@RequestBody Client client){
-        return ResponseEntity.status(HttpStatus.OK).body(clientService.update(client));
+    public ResponseEntity<Address> update(@RequestBody Address address){
+        return ResponseEntity.status(HttpStatus.OK).body(addressService.update(address));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
-        clientService.deleteById(id);
+        addressService.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
-
 }
