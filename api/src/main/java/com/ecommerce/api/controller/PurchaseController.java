@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecommerce.api.dto.PurchaseCreateDto;
 import com.ecommerce.api.model.Purchase;
 import com.ecommerce.api.service.PurchaseService;
 
@@ -37,7 +38,7 @@ public class PurchaseController {
     }
     
     @PostMapping
-    public ResponseEntity<Purchase> create(@RequestBody Purchase purchase){
+    public ResponseEntity<Purchase> create(@RequestBody PurchaseCreateDto purchase){
         return ResponseEntity.status(HttpStatus.OK).body(purchaseService.save(purchase));
     }
 
